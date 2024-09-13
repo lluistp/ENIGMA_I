@@ -6,10 +6,10 @@ Rotor::Rotor(){
 
 Rotor::Rotor(const string type, const int ring_pos, const int start_pos){
 
-    initial_pos = start_pos-1;
+    rotorConfig.initial_pos = start_pos-1;
+    rotorConfig.ring_config = ring_pos-1;
+    rotorConfig.rotor_type = type;
     num_rotations = start_pos-1;
-    ring_config = ring_pos-1;
-    rotor_type = type;
 
     if (type == "I"){
         notches = {5,11,13,6,12,7,4,17,22,26,14,20,15,23,25,8,24,21,19,16,1,9,2,18,3,10}; 
@@ -32,9 +32,9 @@ Rotor::Rotor(const string type, const int ring_pos, const int start_pos){
         turning_notch = 25;
     }
 
-    if (ring_config != 0){
+    if (rotorConfig.ring_config != 0){
         for(auto i = notches.begin(); i != notches.end(); ++i) {
-            *i = *i + ring_config;
+            *i = *i + rotorConfig.ring_config;
             if(*i > ALPHABET_LENGTH) *i = *i - (ALPHABET_LENGTH);
         }
     }
@@ -42,7 +42,7 @@ Rotor::Rotor(const string type, const int ring_pos, const int start_pos){
 }
 
 void Rotor::reset(){
-    num_rotations = initial_pos;
+    num_rotations = rotorConfig.initial_pos;
 }
 
 void Rotor::rotate(){
@@ -51,7 +51,7 @@ void Rotor::rotate(){
 }
 
 int Rotor::stepPreReflector(int pos){
-    pos = pos + num_rotations - ring_config;
+    pos = pos + num_rotations - rotorConfig.ring_config;
     pos = standarizationValue(pos);
     pos = notches[pos-1] - num_rotations;
     pos = standarizationValue(pos);
@@ -63,7 +63,7 @@ int Rotor::stepPastReflector(int letter){
     letter = letter + num_rotations;
     letter = standarizationValue(letter);
     pos = find(notches.begin(), notches.end(), letter);
-    letter = pos - notches.begin() - num_rotations + ring_config + 1;
+    letter = pos - notches.begin() - num_rotations + rotorConfig.ring_config + 1;
     letter = standarizationValue(letter);
     return letter;
 }
@@ -72,10 +72,8 @@ bool Rotor::rotateNotchPos(){
     return num_rotations == turning_notch;
 }
 
-void Rotor::showRotorConfig(){
-    cout << "ROTOR TYPE: " << rotor_type;
-    cout << "; RING CONFIG: " << char(ring_config+LETTERS_ASCII_DIF+1);
-    cout << "; INITIAL POS: " << char(initial_pos+LETTERS_ASCII_DIF+1) << endl;
+const ConfigData Rotor::getRotorConfig(){
+    return rotorConfig;
 }
 
 int Rotor::standarizationValue(int value){

@@ -12,6 +12,7 @@
         "type_traits": "cpp",
         "utility": "cpp",
         "xmemory": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "initializer_list": "cpp"
     }
 }

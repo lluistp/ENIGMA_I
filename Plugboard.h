@@ -14,7 +14,8 @@ class Plugboard{
         Plugboard();
         void setPlugboard(const int letter1, const int letter2);
         int swapLetter(int letter);
-        void showPlugboardConfig();
+
+        const vector<int>& getConfig();
 
     private:
         vector<int> letterPair;

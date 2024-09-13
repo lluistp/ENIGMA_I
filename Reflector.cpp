@@ -15,7 +15,7 @@ int Reflector::reflectLetter(int pos){
     return notches[pos-1];
 }
 
-void Reflector::showReflectorConfig(){
-    cout << "UKW: " << reflec_type << endl;
+const string Reflector::getConfig(){
+    return reflec_type;
 }
 

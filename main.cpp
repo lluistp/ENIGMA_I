@@ -108,29 +108,51 @@ void configPlugboardEnigma(Enigma& enigma){
     }
 }
 
+void showConfigEnigma(Enigma& enigma){
+    cout << endl << "ACTUAL CONFIGURATION:" << endl;
+    cout << "UKW: " << enigma.getReflectorConfig() << endl;
+    ConfigData rotorData = enigma.getRightRotorConfig();
+    cout << "RIGHT ROTOR: TYPE: " << rotorData.rotor_type << ", RING CONFIG: " << char(rotorData.ring_config+LETTERS_ASCII_DIF+1) << ", INITIAL POS: " << char(rotorData.initial_pos+LETTERS_ASCII_DIF+1) << endl; 
+    rotorData = enigma.getMiddleRotorConfig();
+    cout << "MIDDLE ROTOR: TYPE: " << rotorData.rotor_type << ",RING CONFIG: " << char(rotorData.ring_config+LETTERS_ASCII_DIF+1) << ", INITIAL POS: " << char(rotorData.initial_pos+LETTERS_ASCII_DIF+1) << endl;
+    rotorData = enigma.getLeftRotorConfig();
+    cout << "LEFT ROTOR: TYPE: " << rotorData.rotor_type << ", RING CONFIG: " << char(rotorData.ring_config+LETTERS_ASCII_DIF+1) << ", INITIAL POS: " << char(rotorData.initial_pos+LETTERS_ASCII_DIF+1) << endl;
+    cout << "PLUGBOARD CONFIG: ";
+    vector<int> plugboardConfig = enigma.getPlugboardConfig();
+    for(auto i = plugboardConfig.begin(); i != plugboardConfig.end(); ++i) {
+        if(*i != 0) cout << char(i-plugboardConfig.begin()+LETTERS_ASCII_DIF+1) << "->" << char(*i+LETTERS_ASCII_DIF) << " ";
+        else;
+    }
+    cout << endl << endl;
+}
+
+bool finishConfig(){
+    bool done = false;
+    string entry;
+        while(!done){
+        cout << "FINISH CONFIGURATION { Y } OR START AGAIN { N } ?" << endl;
+        cin >> entry;
+        if(entry.size() == 1 && (entry == "Y" || entry == "N")){
+            if(entry == "Y"){
+                done = true;
+                return true;
+            }
+            else done = true;
+            return false;
+        }
+        else cout << "WRONG ENTRY" << endl;
+    }  
+}
+
 void configEnigma(Enigma& enigma){
     bool config = false;
-    string entry;
     while(!config){
         cout << "START ENIGMA CONFIGURATION:" << endl;
         configReflectorEnigma(enigma);
         configRotorEnigma(enigma);
         configPlugboardEnigma(enigma);
-        cout << endl << "ACTUAL CONFIGURATION:" << endl;
-        enigma.showEnigmaConfig();
-        bool done = false;
-        while(!done){
-            cout << "FINISH CONFIGURATION { Y } OR START AGAIN { N } ?" << endl;
-            cin >> entry;
-            if(entry.size() == 1 && (entry == "Y" || entry == "N")){
-                if(entry == "Y"){
-                    done = true;
-                    config = true;
-                }
-                else done = true;
-            }
-            else cout << "WRONG ENTRY" << endl;
-        }
+        showConfigEnigma(enigma);
+        config = finishConfig();
     }
 }
 
@@ -148,5 +170,6 @@ int main(){
         cout << char(letter + LETTERS_ASCII_DIF) << endl;
         cin >> letter;
     }
+    
     return (0);
 }

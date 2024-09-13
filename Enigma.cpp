@@ -22,15 +22,24 @@
             plugboard.setPlugboard(letter1,letter2);
         }
 
-        void Enigma::showEnigmaConfig(){
-            reflector.showReflectorConfig();
-            cout << "RIGHT ROTOR -> ";
-            rotor_right.showRotorConfig();
-            cout << "MIDDLE ROTOR -> ";
-            rotor_middle.showRotorConfig();
-            cout << "RIGHT ROTOR -> ";
-            rotor_left.showRotorConfig();
-            plugboard.showPlugboardConfig();
+        const string Enigma::getReflectorConfig(){
+            return reflector.getConfig();
+        }
+
+        const ConfigData Enigma::getRightRotorConfig(){
+            return rotor_right.getRotorConfig();
+        }
+        
+        const ConfigData Enigma::getMiddleRotorConfig(){
+            return rotor_middle.getRotorConfig();
+        }
+
+        const ConfigData Enigma::getLeftRotorConfig(){
+            return rotor_left.getRotorConfig();
+        }
+
+        const vector<int>& Enigma::getPlugboardConfig(){
+            return plugboard.getConfig();
         }
 
         int Enigma::processLetter(int letter){

@@ -10,6 +10,11 @@
 
 using namespace std;
 
+struct ConfigData{
+    string rotor_type;
+    int initial_pos = 0;
+    int ring_config = 0;
+};
 class Rotor{
 
     public:
@@ -20,16 +25,13 @@ class Rotor{
         int stepPreReflector(int pos);
         int stepPastReflector(int letter);
         bool rotateNotchPos();
-        void showRotorConfig();
+        const ConfigData getRotorConfig();
 
     private:
-        int initial_pos = 0;
+        ConfigData rotorConfig;
         int num_rotations = 0;
         int turning_notch = 0;
-        int ring_config = 0;
-        string rotor_type;
         vector<int> notches;
-        
         int standarizationValue(int value);
 };
 

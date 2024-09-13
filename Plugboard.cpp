@@ -22,11 +22,6 @@ int Plugboard::swapLetter(int letter){
     return letter;
 }
 
-void Plugboard::showPlugboardConfig(){
-        cout << "PLUGBOARD: ";
-        for(auto i = letterPair.begin(); i != letterPair.end(); ++i) {
-            if(*i != 0) cout << char(i-letterPair.begin()+LETTERS_ASCII_DIF+1) << " -> " << char(*i+LETTERS_ASCII_DIF) << " ";
-            else;
-        }
-        cout << endl;
+const vector<int>& Plugboard::getConfig(){
+        return letterPair;
 }

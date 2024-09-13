@@ -14,7 +14,9 @@ class Reflector{
         Reflector();
         Reflector(const string type);
         int reflectLetter(int pos);
-        void showReflectorConfig();
+        
+        const string getConfig();
+        
     private:
         vector<int> notches;
         string reflec_type;

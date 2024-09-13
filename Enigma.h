@@ -15,7 +15,13 @@ class Enigma{
         void configLeftRotor(const string type, const int ring_pos, const int ini_pos);
         void configReflector(const string type);
         void configPlugboard(const int letter1, const int letter2);
-        void showEnigmaConfig();
+
+        const string getReflectorConfig();
+        const ConfigData getRightRotorConfig();
+        const ConfigData getMiddleRotorConfig();
+        const ConfigData getLeftRotorConfig();
+        const vector<int>& getPlugboardConfig();
+
         int processLetter(int letter);
 
     private:
