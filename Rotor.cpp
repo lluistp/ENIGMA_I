@@ -50,7 +50,6 @@ void Rotor::rotate(){
     if (num_rotations == ALPHABET_LENGTH) num_rotations = 0;
 }
 
-
 int Rotor::stepPreReflector(int pos){
     pos = pos + num_rotations - ring_config;
     pos = standarizationValue(pos);
