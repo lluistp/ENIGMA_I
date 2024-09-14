@@ -164,47 +164,95 @@ void processMessageManually(Enigma& enigma, ofstream& outputFile){
     int counter = 0;
     int addSeparator = 0;
     cout << "ENTER MESSAGE: ";
-    cin >> message;
-    try {
-        if (message.empty())throw "EMPTY MESSAGE";
-        else {
-            outputFile << "RESULTING MESSAGE: ";
-            for(string::iterator it = message.begin(); it != message.end(); it++){
-                letter = *it - LETTERS_ASCII_DIF;
-                if ((letter > 0 && letter <= ALPHABET_LENGTH) && (letter > 0 && letter <= ALPHABET_LENGTH)){
-                    letter = enigma.processLetter(letter);
-                    outputFile << char(letter+LETTERS_ASCII_DIF);
-                    cout << char(letter+LETTERS_ASCII_DIF);
-                    counter++;
-                    addSeparator++;
-                    if(addSeparator == 5){
-                        outputFile << " ";
-                        cout << " ";
-                        addSeparator = 0;
-                    }
+    cin.ignore();
+    getline(cin, message);
+    if (message.empty())cout << "EMPTY MESSAGE" << endl;
+    else {
+        outputFile << "MESSAGE ENTERED MANUALLY: " << message << endl << "ENCRYPTION/DECRYPTION: ";
+        cout << "ENCRYPTION/DECRYPTION: ";
+        for(string::iterator it = message.begin(); it != message.end(); it++){
+            letter = *it - LETTERS_ASCII_DIF;
+            if ((letter > 0 && letter <= ALPHABET_LENGTH) && (letter > 0 && letter <= ALPHABET_LENGTH)){
+                letter = enigma.processLetter(letter);
+                outputFile << char(letter+LETTERS_ASCII_DIF);
+                cout << char(letter+LETTERS_ASCII_DIF);
+                counter++;
+                addSeparator++;
+                if(addSeparator == 5){
+                    outputFile << " ";
+                    cout << " ";
+                    addSeparator = 0;
                 }
-                else if ((*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH) && (*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH)){
-                    letter = enigma.processLetter(*it - LETTERS_UNDERCASE_ASCII_DIF);
-                    outputFile << char(letter+LETTERS_ASCII_DIF);
-                    cout << char(letter+LETTERS_ASCII_DIF);
-                    counter++;
-                    addSeparator++;
-                    if(addSeparator == 5){
-                        outputFile << " ";
-                        cout << " ";
-                        addSeparator = 0;
-                    }
-                }
-                else ;
             }
-            outputFile << endl;
-            outputFile << "NUMBER OF CHARACTERS: " << counter << endl;
-            cout << endl;
-            cout << "NUMBER OF CHARACTERS: " << counter << endl;
+            else if ((*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH) && (*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH)){
+                letter = enigma.processLetter(*it - LETTERS_UNDERCASE_ASCII_DIF);
+                outputFile << char(letter+LETTERS_ASCII_DIF);
+                cout << char(letter+LETTERS_ASCII_DIF);
+                counter++;
+                addSeparator++;
+                if(addSeparator == 5){
+                    outputFile << " ";
+                    cout << " ";
+                    addSeparator = 0;
+                }
+            }
+            else ;
         }
+        outputFile << endl << "NUMBER OF CHARACTERS: " << counter << endl << endl;
+        cout << endl << "NUMBER OF CHARACTERS: " << counter << endl << endl;
     }
-    catch (const char *error){
-        cerr << error << endl;
+}
+
+void processMessageAsFile(Enigma& enigma, ofstream& outputFile){
+    string fileName;
+    char letter;
+    int counter;
+    int addSeparator;
+    cout << "ENTER FILE NAME: ";
+    cin >> fileName;
+    if (fileName.empty())cout << "EMPTY FILENAME" << endl;
+    else {
+        ifstream inputFile(fileName);
+        if(!inputFile.is_open()) cout << "ERROR OPENING THE FILE" << endl;
+        else{
+            string line;
+            while(getline(inputFile,line)){
+                outputFile << "MESSAGE ENTERED FROM FILE " << fileName << " : " << line << endl << "ENCRYPTION/DECRYPTION: ";
+                cout << "MESSAGE ENTERED FROM FILE " << fileName << " : " << line << endl << "ENCRYPTION/DECRYPTION: ";
+                counter = addSeparator = 0;
+                for(string::iterator it = line.begin(); it != line.end(); it++){
+                    letter = *it - LETTERS_ASCII_DIF;
+                    if ((letter > 0 && letter <= ALPHABET_LENGTH) && (letter > 0 && letter <= ALPHABET_LENGTH)){
+                        letter = enigma.processLetter(letter);
+                        outputFile << char(letter+LETTERS_ASCII_DIF);
+                        cout << char(letter+LETTERS_ASCII_DIF);
+                        counter++;
+                        addSeparator++;
+                        if(addSeparator == 5){
+                            outputFile << " ";
+                            cout << " ";
+                            addSeparator = 0;
+                        }
+                    }
+                    else if ((*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH) && (*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH)){
+                        letter = enigma.processLetter(*it - LETTERS_UNDERCASE_ASCII_DIF);
+                        outputFile << char(letter+LETTERS_ASCII_DIF);
+                        cout << char(letter+LETTERS_ASCII_DIF);
+                        counter++;
+                        addSeparator++;
+                        if(addSeparator == 5){
+                            outputFile << " ";
+                            cout << " ";
+                            addSeparator = 0;
+                        }
+                    }
+                    else ;
+                }
+            outputFile << endl << "NUMBER OF CHARACTERS: " << counter << endl << endl;
+            cout << endl << "NUMBER OF CHARACTERS: " << counter << endl << endl;
+            }
+            inputFile.close();
+        }
     }
 }
 
@@ -218,7 +266,7 @@ void optionProcessMessage(Enigma& enigma, ofstream& outputFile){
         cout << "--- 0 --- GO BACK" << endl;
         cin >> option;
         if(option == "1") processMessageManually(enigma,outputFile);
-        else if(option == "2") ;
+        else if(option == "2") processMessageAsFile(enigma,outputFile);
         else if(option == "0") finish = true;
         else cout << "ENTER A VALID OPTION" << endl;
     }

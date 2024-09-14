@@ -13,6 +13,7 @@
         "utility": "cpp",
         "xmemory": "cpp",
         "xtr1common": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "xlocinfo": "cpp"
     }
 }

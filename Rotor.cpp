@@ -31,7 +31,7 @@ Rotor::Rotor(const string type, const int ring_pos, const int start_pos){
         notches = {22,26,2,18,7,9,20,25,21,16,19,4,14,8,12,24,1,23,13,10,17,15,6,5,3,11};
         turning_notch = 25;
     }
-
+    
     if (rotorConfig.ring_config != 0){
         for(auto i = notches.begin(); i != notches.end(); ++i) {
             *i = *i + rotorConfig.ring_config;
