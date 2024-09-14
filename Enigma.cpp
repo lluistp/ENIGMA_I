@@ -22,6 +22,12 @@
             plugboard.setPlugboard(letter1,letter2);
         }
 
+        void Enigma::reset(){
+            rotor_right.reset();
+            rotor_middle.reset();
+            rotor_left.reset();
+        }
+
         const string Enigma::getReflectorConfig(){
             return reflector.getConfig();
         }

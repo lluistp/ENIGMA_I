@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 
 #include "Enigma.h"
@@ -109,7 +110,7 @@ void configPlugboardEnigma(Enigma& enigma){
 }
 
 void showConfigEnigma(Enigma& enigma){
-    cout << endl << "ACTUAL CONFIGURATION:" << endl;
+    cout << endl << "CONFIGURATION:" << endl;
     cout << "UKW: " << enigma.getReflectorConfig() << endl;
     ConfigData rotorData = enigma.getRightRotorConfig();
     cout << "RIGHT ROTOR: TYPE: " << rotorData.rotor_type << ", RING CONFIG: " << char(rotorData.ring_config+LETTERS_ASCII_DIF+1) << ", INITIAL POS: " << char(rotorData.initial_pos+LETTERS_ASCII_DIF+1) << endl; 
@@ -129,7 +130,7 @@ void showConfigEnigma(Enigma& enigma){
 bool finishConfig(){
     bool done = false;
     string entry;
-        while(!done){
+    while(!done){
         cout << "FINISH CONFIGURATION { Y } OR START AGAIN { N } ?" << endl;
         cin >> entry;
         if(entry.size() == 1 && (entry == "Y" || entry == "N")){
@@ -138,10 +139,10 @@ bool finishConfig(){
                 return true;
             }
             else done = true;
-            return false;
         }
         else cout << "WRONG ENTRY" << endl;
-    }  
+    }
+    return false; 
 }
 
 void configEnigma(Enigma& enigma){
@@ -153,23 +154,105 @@ void configEnigma(Enigma& enigma){
         configPlugboardEnigma(enigma);
         showConfigEnigma(enigma);
         config = finishConfig();
+        cout << endl;
+    }
+}
+
+void processMessageManually(Enigma& enigma, ofstream& outputFile){
+    string message;
+    char letter;
+    int counter = 0;
+    int addSeparator = 0;
+    cout << "ENTER MESSAGE: ";
+    cin >> message;
+    try {
+        if (message.empty())throw "EMPTY MESSAGE";
+        else {
+            outputFile << "RESULTING MESSAGE: ";
+            for(string::iterator it = message.begin(); it != message.end(); it++){
+                letter = *it - LETTERS_ASCII_DIF;
+                if ((letter > 0 && letter <= ALPHABET_LENGTH) && (letter > 0 && letter <= ALPHABET_LENGTH)){
+                    letter = enigma.processLetter(letter);
+                    outputFile << char(letter+LETTERS_ASCII_DIF);
+                    cout << char(letter+LETTERS_ASCII_DIF);
+                    counter++;
+                    addSeparator++;
+                    if(addSeparator == 5){
+                        outputFile << " ";
+                        cout << " ";
+                        addSeparator = 0;
+                    }
+                }
+                else if ((*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH) && (*it - LETTERS_UNDERCASE_ASCII_DIF > 0 && *it - LETTERS_UNDERCASE_ASCII_DIF <= ALPHABET_LENGTH)){
+                    letter = enigma.processLetter(*it - LETTERS_UNDERCASE_ASCII_DIF);
+                    outputFile << char(letter+LETTERS_ASCII_DIF);
+                    cout << char(letter+LETTERS_ASCII_DIF);
+                    counter++;
+                    addSeparator++;
+                    if(addSeparator == 5){
+                        outputFile << " ";
+                        cout << " ";
+                        addSeparator = 0;
+                    }
+                }
+                else ;
+            }
+            outputFile << endl;
+            outputFile << "NUMBER OF CHARACTERS: " << counter << endl;
+            cout << endl;
+            cout << "NUMBER OF CHARACTERS: " << counter << endl;
+        }
+    }
+    catch (const char *error){
+        cerr << error << endl;
+    }
+}
+
+void optionProcessMessage(Enigma& enigma, ofstream& outputFile){
+    string option;
+    bool finish = false;
+    while(!finish){
+        cout << "OPTIONS:" << endl;
+        cout << "--- 1 --- ENTER MESSAGE MANUALLY" << endl;
+        cout << "--- 2 --- ENTER MESSAGE AS A FILE" << endl;
+        cout << "--- 0 --- GO BACK" << endl;
+        cin >> option;
+        if(option == "1") processMessageManually(enigma,outputFile);
+        else if(option == "2") ;
+        else if(option == "0") finish = true;
+        else cout << "ENTER A VALID OPTION" << endl;
+    }
+}
+
+void useEnigma(Enigma& enigma){
+    ofstream outputFile("Output.txt");
+    string option;
+    bool finish = false;
+    while(!finish){
+        cout << "OPTIONS:" << endl;
+        cout << "--- 1 --- PROCESS MESSAGE TO ENCRYPT/DECRYPT" << endl;
+        cout << "--- 2 --- RESET ENIGMA" << endl;
+        cout << "--- 3 --- SHOW ENIGMA CONFIGURATION" << endl;
+        cout << "--- 0 --- FINISH PROGRAM" << endl;
+        cin >> option;
+        if(option == "1") optionProcessMessage(enigma,outputFile);
+        else if(option == "2") enigma.reset();
+        else if(option == "3") showConfigEnigma(enigma);
+        else if(option == "0") {
+            finish = true;
+            outputFile.close();
+        }
+        else cout << "ENTER A VALID OPTION" << endl;
     }
 }
 
 int main(){
 
-    char letter = '1';
-    bool config = false;
     Enigma enigma1;
-    
+
     configEnigma(enigma1);
 
-    cin >> letter;
-    while(letter != '0'){  
-        letter = enigma1.processLetter(letter - LETTERS_ASCII_DIF);
-        cout << char(letter + LETTERS_ASCII_DIF) << endl;
-        cin >> letter;
-    }
+    useEnigma(enigma1);
     
     return (0);
 }
