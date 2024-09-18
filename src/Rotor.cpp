@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include "Rotor.h"
+#include "../header/Rotor.h"
 
 Rotor::Rotor(){
     

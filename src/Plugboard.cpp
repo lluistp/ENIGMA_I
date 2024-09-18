@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include "Plugboard.h"
+#include "../header/Plugboard.h"
 
 Plugboard::Plugboard(){
     letterPair = vector<int>(ALPHABET_LENGTH,0);  

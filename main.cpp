@@ -12,8 +12,8 @@
 #include <fstream>
 #include <string>
 
-#include "Enigma.h"
-#include "constants.h"
+#include "./header/Enigma.h"
+#include "./header/constants.h"
 
 using namespace std;
 

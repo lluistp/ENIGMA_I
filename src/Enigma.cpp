@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include "Enigma.h"
+#include "../header/Enigma.h"
 
         Enigma::Enigma(){}
 
