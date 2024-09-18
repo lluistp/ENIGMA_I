@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author Lluis Torres (https://github.com/lluistp)
+ * @brief Contains the main program with it's functions to use a class Enigma and encrypt/decrypt messages.
+ * @version 0.1
+ * @date 2024-09-17
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,10 +17,12 @@
 
 using namespace std;
 
-/** Ask to the user for a Reflector (UKW) configuration and calls the function to set that Enigma's component.
+/** 
+ * @brief Ask to the user for a Reflector (UKW) configuration and calls the function to set that Enigma's component.
  * 
- * The function will ask to the user to choose on of the three possible configurations for the reflector of an Enigma I. Those options can be A, B or C, and the function itself makes sure that the entry is correct before calling the Enigma method. In case of an incorrect entry, it shows a message and ask for the configuration again. It has a loop that stays until a correct configuration is entered.
- * @param[in] enigma  Pass by reference of the object ENIGMA we're using.
+ * The function will ask to the user to choose on of the three possible configurations for the reflector of an Enigma I. Those options can be A, B or C, and the function itself makes sure that the entry is correct before calling the Enigma method. 
+ * @details In case of an incorrect entry, it shows a message and ask for the configuration again. It has a loop that stays until a correct configuration is entered.
+ * @param[in] enigma  Pass by reference of the object Enigma we're using.
  */
 void configReflectorEnigma(Enigma& enigma){
     bool config = false;
@@ -26,15 +38,15 @@ void configReflectorEnigma(Enigma& enigma){
     }
 }
 
-/** Ask to the user for three rotor configurations, one time for each rotor of an ENIGMA I, and calls the function to set those components.
+/** 
+ * @brief Ask to the user for three rotor configurations, one time for each rotor of an Enigma, and calls the function to set those components.
  * 
  * The function will ask to the use all the parameters to set each one of the three rotors of an ENIGMA I, right, middle and left, and will check that entry before calling Enigma's method. The parameters for each rotor are:
  * -# TYPE of the rotor. For an ENIGMA I there are 5 types, named from 1 to 5 in roman numbers
  * -# RING CONFIGURATION sets an initial movement of the array of letters of a rotor before this in inserted in the Enigma
  * -# INITIAL POSITION sets an initial rotation of the rotor, not just the array of letters.
- * Both RING CONFIG. and INITIAL POS. are set with a letter inside the english alphabet, which the method will change to convert it in a number between 1 to 26.
- * This function contain three loops that can't be solved until a correct configuration has been entered for all three rotors.
- * @param[in] enigma  Pass by reference of the object ENIGMA we're using.
+ * @details Both RING CONFIG. and INITIAL POS. are set with a letter inside the english alphabet, which the method will change to convert it in a number between 1 to 26. This function contain three loops that can't be solved until a correct configuration has been entered for all three rotors.
+ * @param[in] enigma  Pass by reference of the object Enigma we're using.
  */
 void configRotorEnigma(Enigma& enigma){
     bool config = false;
@@ -104,10 +116,12 @@ void configRotorEnigma(Enigma& enigma){
     }
 }
 
-/** Ask to the user for a plugboard configuration and calls the function to set that Enigma's component.
+/** 
+ * @brief Ask to the user for a plugboard configuration and calls the function to set that Enigma's component.
  * 
- * The function will ask the user to enter pairs of letters inside an english alphabet, it'll convert them in numbers from 1 to 26 and it'll call the enigma's method to set this component. The function will guarantee that the inputs are correct. Also it has a loop to keep entering pairs until the user wants to leave wrinting DONE as input. ENIGMA I works perfectly even if the user desides to skip the Plugboard configuration.
- * @param[in] enigma  Pass by reference of the object ENIGMA we're using.
+ * The function will ask the user to enter pairs of letters inside an english alphabet, it'll convert them in numbers from 1 to 26 and it'll call the enigma's method to set this component. 
+ * @details The function will guarantee that the inputs are correct. Also it has a loop to keep entering pairs until the user wants to leave wrinting DONE as input. ENIGMA I works perfectly even if the user desides to skip the Plugboard configuration.
+ * @param[in] enigma  Pass by reference of the object Enigma we're using.
  */
 void configPlugboardEnigma(Enigma& enigma){
     bool config = false;
@@ -129,10 +143,11 @@ void configPlugboardEnigma(Enigma& enigma){
     }
 }
 
-/** Shows as a cout the actual configuration of our ENIGMA I.
+/** 
+ * @brief Shows as a cout the actual configuration of our Enigma.
  * 
  * Gets from our Enigma the configuration we have and shows it with the definition of each element as a cout iostream on our terminal.
- * @param[in] enigma  Pass by reference of the object ENIGMA we're using.
+ * @param[in] enigma  Pass by reference of the object Enigma we're using.
  */
 void showConfigEnigma(Enigma& enigma){
     cout << endl << "CONFIGURATION:" << endl;
@@ -152,10 +167,13 @@ void showConfigEnigma(Enigma& enigma){
     cout << endl << endl;
 }
 
-/** Ask the user if they want to finish the Enigma configuration.
+/** 
+ * @brief Ask the user if they want to finish the Enigma configuration.
  * 
- * The function will ask the user if they are done with the configuration for the enigma. The entry has to be "Y" or "N". Contains a loop that can be left only with a correct entry.
- * @return true if "Y", false with "N".
+ * The function will ask the user if they are done with the configuration for the enigma. The entry has to be "Y" or "N". 
+ * @details Contains a loop that can be left only with a correct entry.
+ * @return true if input == "Y"
+ * @return false if input == "N".
  */
 bool finishConfig(){
     bool done = false;
@@ -175,10 +193,11 @@ bool finishConfig(){
     return false; 
 }
 
-/** Calls the different functions that will be used to cofigure our ENGIMA I.
+/** 
+ * @brief Calls the different functions that will be used to cofigure our Enigma.
  * 
- * This function will call all the necessary functions to configure our ENIGMA I. It contains a loop that ends once the configuration is done (know with the function finishConfig()).
- * @param[in] enigma  Pass by reference of the object ENIGMA we're using.
+ * This function will call all the necessary functions to configure our ENIGMA I. It contains a loop that ends once the configuration is done (know with the function finishConfig() ).
+ * @param[in] enigma  Pass by reference of the object Enigma we're using.
  */
 void configEnigma(Enigma& enigma){
     bool config = false;
@@ -193,11 +212,19 @@ void configEnigma(Enigma& enigma){
     }
 }
 
+/**
+ * @brief Asks the user to enter a message manually for it to be used in our Enigma
+ * 
+ * This function will ask the user to enter using their terminal a message to be encrypted or decrypted by the Enigma. With the results the function will show them on the terminal and it'll write them on the given outputFile (at the end of it).
+ * @details From the message, only the letters of the English alphabet (either capitals or uppercase). The function will process the message previously to ignore any character not valid for Enigma. The results will have the same format as the original ENIGMA I, groups of 5 characters with an space in between.
+ * @param[in] enigma Pass by reference of the object Enigma we're using.
+ * @param[out] outputFile Pass by reference of a ofstream file already open that will be used to write the results of the function.
+ */
 void processMessageManually(Enigma& enigma, ofstream& outputFile){
     string message;
     char letter;
     int counter = 0;
-    int addSeparator = 0;
+    int addSeparator = 0; //Counter that will be used to add a space each 5 processed characters
     cout << "ENTER MESSAGE: ";
     cin.ignore();
     getline(cin, message);
@@ -238,11 +265,19 @@ void processMessageManually(Enigma& enigma, ofstream& outputFile){
     }
 }
 
+/**
+ * @brief Asks the user to enter the name of the file with the message that has to be used in our Enigma
+ * 
+ * This function will ask the user to enter using their terminal the name of the file with the message that has to be encrypted or decrypted by the Enigma. The function will open the file and process its contents. With the results the function will show them on the terminal and it'll write them on the given outputFile (at the end of it).
+ * @details The function will check if the file with the message was opened properly. From the message, only the letters of the English alphabet (either capitals or uppercase). The function will process the message previously to ignore any character not valid for Enigma. The results will have the same format as the original ENIGMA I, groups of 5 characters with an space in between.
+ * @param[in] enigma Pass by reference of the object Enigma we're using.
+ * @param[out] outputFile Pass by reference of a ofstream file already open that will be used to write the results of the function.
+ */
 void processMessageAsFile(Enigma& enigma, ofstream& outputFile){
     string fileName;
     char letter;
     int counter;
-    int addSeparator;
+    int addSeparator; //Counter that will be used to add a space each 5 processed characters
     cout << "ENTER FILE NAME: ";
     cin >> fileName;
     if (fileName.empty())cout << "EMPTY FILENAME" << endl;
@@ -291,6 +326,14 @@ void processMessageAsFile(Enigma& enigma, ofstream& outputFile){
     }
 }
 
+/**
+ * @brief This function controls an options menu related with how we want to enter a message to process.
+ *   
+ * After showig the available options on the terminal, the function will ask the user which option they require.
+ * @details Entry must be "1" to proceed to processMessageManually(), "2" to proceed to processMessageAsFile(), or "0" to go back and exit the function. A loop prevents the user to leave until a valid entry.
+ * @param[in] enigma Pass by reference of the object Enigma we're using.
+ * @param[out] outputFile Pass by reference of a ofstream file already open that will be used to write the results of the functions that will process the message.
+ */
 void optionProcessMessage(Enigma& enigma, ofstream& outputFile){
     string option;
     bool finish = false;
@@ -307,6 +350,13 @@ void optionProcessMessage(Enigma& enigma, ofstream& outputFile){
     }
 }
 
+/**
+ * @brief This function controls the main options menu with the Enigma functionalities.
+ *   
+ * After showig the available options on the terminal, the function will ask the user which option they require. This function also opens or creates a file named "Output.txt" that will be used to have our results. The file will contain every message we want to process, and it wont be closed until we leave the function to stop the program.
+ * @details Entry must be "1" to proceed to processMessageManually(), "2" to proceed to reset our Enigma to it's initial configuration, "3" to show our Enigma configuration or "0" to go back to our main(). A loop prevents the user to leave until a valid entry.
+ * @param[in] enigma Pass by reference of the object Enigma we're using.
+ */
 void useEnigma(Enigma& enigma){
     ofstream outputFile("Output.txt");
     string option;
@@ -329,6 +379,12 @@ void useEnigma(Enigma& enigma){
     }
 }
 
+/**
+ * @brief Creates an object Enigma and uses it.
+ * 
+ * Our main will first create an object Enigma and then will call the functions configEnigma() and useEnigma().
+ * @return 0 to finish the program.
+ */
 int main(){
 
     Enigma enigma1;

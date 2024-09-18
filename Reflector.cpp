@@ -1,3 +1,13 @@
+/**
+ * @file Reflector.cpp
+ * @author Lluis Torres (https://github.com/lluistp)
+ * @brief Contains implementation of the class Reflector. It's documentation in the file Reflector.h .
+ * @version 0.1
+ * @date 2024-09-17
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "Reflector.h"
 
 Reflector::Reflector(){

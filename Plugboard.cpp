@@ -1,3 +1,13 @@
+/**
+ * @file Plugboard.cpp
+ * @author Lluis Torres (https://github.com/lluistp)
+ * @brief Contains implementation of the class Plugboard. It's documentation in the file Plugboard.h .
+ * @version 0.1
+ * @date 2024-09-17
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "Plugboard.h"
 
 Plugboard::Plugboard(){

@@ -1,3 +1,13 @@
+/**
+ * @file Rotor.cpp
+ * @author Lluis Torres (https://github.com/lluistp)
+ * @brief Contains implementation of the class Rotor. It's documentation in the file Rotor.h .
+ * @version 0.1
+ * @date 2024-09-17
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "Rotor.h"
 
 Rotor::Rotor(){

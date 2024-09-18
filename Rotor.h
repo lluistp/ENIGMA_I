@@ -1,3 +1,13 @@
+/**
+ * @file Rotor.h
+ * @author Lluis Torres (https://github.com/lluistp)
+ * @brief 
+ * @version 0.1
+ * @date 2024-09-17
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef _ROTOR_H_
 #define _ROTOR_H_
 
@@ -19,6 +29,10 @@ class Rotor{
     public:
         Rotor();
         Rotor(const string type, const int ring_pos, const int start_pos);
+        /**
+         * @brief hi
+         * 
+         */
         void reset();
         void rotate();
         int stepPreReflector(int pos);

@@ -1,3 +1,13 @@
+/**
+ * @file Reflector.h
+ * @author Lluis Torres (https://github.com/lluistp)
+ * @brief 
+ * @version 0.1
+ * @date 2024-09-17
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef _REFLECTOR_H_
 #define _REFLECTOR_H_
 
