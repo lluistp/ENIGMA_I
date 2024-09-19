@@ -1,7 +1,7 @@
 /**
  * @file Enigma.h
  * @author Lluis Torres (https://github.com/lluistp)
- * @brief Contains the declaration of the class Enigma with its components
+ * @brief Contains the declaration of the class Enigma with its parameters and methods
  * @version 0.1
  * @date 2024-09-17
  * 
@@ -25,7 +25,7 @@ using namespace std;
  * - 3 Rotors. There was 5 different rotors, and Enigma used 3 of them inserted on any order, with any configuration and with any initial pos.
  * - 1 Plugboard. Used to connect pairs of letters to be exchanged and add another level of complexity.
  * 
- * To know more about how element works see the specific class or go back to the main page.
+ * To know more about how each element works see the specific class or go back to the main page.
  * 
  * @warning The methods of this class don't do a validation of its inputs. 
  * 
@@ -83,7 +83,7 @@ class Enigma{
          */
         void reset();
         /**
-         * @brief Process the letter entered as input throught all the steps for it to be encrypted.
+         * @brief Advances enigma in one rotation and processes the letter entered as input throught all the steps for it to be encrypted.
          * 
          * @param[in] letter Position of the letter in the alphabet {1 to 26} that we will encrypt.
          * @return int with the position of the letter in the alphabet {1 to 26} resulting from encripting the param letter.
@@ -122,12 +122,16 @@ class Enigma{
         const vector<int>& getPlugboardConfig();
 
     private:
-        Rotor rotor_right;
-        Rotor rotor_middle;
-        Rotor rotor_left;
-        Reflector reflector;
-        Plugboard plugboard;
+        Rotor rotor_right; ///< Rotor object to represent the right rotor of an ENIGMA I.
+        Rotor rotor_middle; ///< Rotor object to represent the middle rotor of an ENIGMA I.
+        Rotor rotor_left; ///< Rotor object to represent the left rotor of an ENIGMA I.
+        Reflector reflector; ///< Reflector object to represent the reflector of an ENIGMA I.
+        Plugboard plugboard; ///< Plugboard object to represent the plugboard of an ENIGMA I.
         
+        /**
+         * @brief Rotates the necessary rotors of the Enigma every time a letter is introduced.
+         * 
+         */
         void mechRotation();
 };
 

@@ -10,10 +10,12 @@
  */
 #include "../header/Plugboard.h"
 
+//CONSTRUCTOR
 Plugboard::Plugboard(){
     letterPair = vector<int>(ALPHABET_LENGTH,0);  
 }
 
+//SETTER
 void Plugboard::setPlugboard(const int letter1, const int letter2){
     if (letterPair[letter1 - 1] != 0 || letterPair[letter2 - 1] != 0){
         int actLetter = letterPair[letter1 - 1];
@@ -26,7 +28,8 @@ void Plugboard::setPlugboard(const int letter1, const int letter2){
     letterPair[letter2 - 1] = letter1;
 }
 
-int Plugboard::swapLetter(int letter){
+//GETTERS
+const int Plugboard::swapLetter(int letter){
     if (letterPair[letter - 1] != 0) letter = letterPair[letter - 1];
     else;
     return letter;

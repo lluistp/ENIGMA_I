@@ -10,6 +10,7 @@
  */
 #include "../header/Reflector.h"
 
+//CONSTRUCTORS
 Reflector::Reflector(){
     
 }
@@ -21,7 +22,8 @@ Reflector::Reflector(string type){
     else notches = {6,22,16,10,9,1,15,25,5,4,18,26,24,23,7,3,20,11,21,17,19,2,14,13,8,12};
 }
 
-int Reflector::reflectLetter(int pos){
+//GETTERS
+const int Reflector::reflectLetter(int pos){
     return notches[pos-1];
 }
 

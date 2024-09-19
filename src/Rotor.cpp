@@ -10,6 +10,7 @@
  */
 #include "../header/Rotor.h"
 
+//CONSTRUTORS
 Rotor::Rotor(){
     
 }
@@ -51,6 +52,7 @@ Rotor::Rotor(const string type, const int ring_pos, const int start_pos){
     else;
 }
 
+//SETTERS
 void Rotor::reset(){
     num_rotations = rotorConfig.initial_pos;
 }
@@ -60,7 +62,8 @@ void Rotor::rotate(){
     if (num_rotations == ALPHABET_LENGTH) num_rotations = 0;
 }
 
-int Rotor::stepPreReflector(int pos){
+//GETTERS
+const int Rotor::stepPreReflector(int pos){
     pos = pos + num_rotations - rotorConfig.ring_config;
     pos = standarizationValue(pos);
     pos = notches[pos-1] - num_rotations;
@@ -68,7 +71,7 @@ int Rotor::stepPreReflector(int pos){
     return pos;
 }
 
-int Rotor::stepPastReflector(int letter){
+const int Rotor::stepPastReflector(int letter){
     vector<int>::iterator pos;
     letter = letter + num_rotations;
     letter = standarizationValue(letter);
@@ -78,7 +81,7 @@ int Rotor::stepPastReflector(int letter){
     return letter;
 }
 
-bool Rotor::rotateNotchPos(){
+const bool Rotor::rotateNotchPos(){
     return num_rotations == turning_notch;
 }
 
@@ -86,6 +89,7 @@ const ConfigData Rotor::getRotorConfig(){
     return rotorConfig;
 }
 
+//PRIVATE METHOD
 int Rotor::standarizationValue(int value){
     if (value > ALPHABET_LENGTH) value = value - ALPHABET_LENGTH;
     else if(value <= 0) value = value + (ALPHABET_LENGTH);
