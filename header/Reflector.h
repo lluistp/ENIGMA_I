@@ -18,7 +18,14 @@
 using namespace std;
 
 /**
- * @brief 
+ * @brief Class meant to represent the reflector of an Enigma and its functionalities. 
+ * 
+ * For the Enigma I this reflector can have 3 types {'A', 'B', 'C'}, and the type decides what alphabet will contain.
+ * Similar to a plugboard fully configured, the reflector alphabet is set in pairs, where position x contains letter y and position y contains letter x. When the reflector gets a position, returns the letter in that position.
+ * 
+ * To know more about how each element works see the specific class or go back to the main page.
+ * 
+ * @warning The methods of this class don't do a validation of its inputs.
  * 
  */
 class Reflector{
@@ -30,30 +37,30 @@ class Reflector{
          */
         Reflector();
         /**
-         * @brief Construct a new Reflector object
+         * @brief Construct a new Reflector object acordingly to the type entered.
          * 
-         * @param type 
+         * @param[in] type Defines the vector<int> notches of the Reflector with alphabet {'A', 'B', 'C'};
          */
         Reflector(const string type);
 
         //GETTERS
         /**
-         * @brief 
+         * @brief Returns the letter in the position entered.
          * 
-         * @param pos 
-         * @return const int 
+         * @param[in] pos Position to check in the vector<int> notches {1 ... 26}.
+         * @return const int with the letter {1 ... 26}.
          */
         const int reflectLetter(int pos);
         /**
-         * @brief Get the Config object
+         * @brief Get the configuration of the Reflector.
          * 
-         * @return const string 
+         * @return const string with the type of the Reflector.
          */
         const string getConfig();
         
     private:
-        vector<int> notches; ///<
-        string reflec_type; ///<
+        vector<int> notches; ///<Vector that contains the alphabet of the Reflector
+        string reflec_type; ///<Defines the type of alphabet.
 };
 
 #endif

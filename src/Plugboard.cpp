@@ -16,6 +16,10 @@ Plugboard::Plugboard(){
 }
 
 //SETTER
+/**
+ * @details While setting the vector, it checks if any of the letters had a previous settings, and if so, it overrites it with the new one, setting the old one to 0.
+ * 
+ */
 void Plugboard::setPlugboard(const int letter1, const int letter2){
     if (letterPair[letter1 - 1] != 0 || letterPair[letter2 - 1] != 0){
         int actLetter = letterPair[letter1 - 1];

@@ -11,7 +11,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-const int ALPHABET_LENGTH = 26; ///<Size of the English alphabet {A ... Z}
+const int ALPHABET_LENGTH = 26; ///<Size of the English alphabet {A ... Z}.
 
 const int LETTERS_ASCII_DIF = 64; ///<Number to scale the int ASCII values of capital letter from {65 ... 90} to {1 ... 26}. 
 
