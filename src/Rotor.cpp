@@ -15,6 +15,13 @@ Rotor::Rotor(){
     
 }
 
+/**
+ * @details This method will define the differents elements of the rotor. Depending on the type entered the method will creat the vector<int> with the alphabet tyre of that type.
+ * Also, it will save the type, the ring position and the initial position on the rotor's rotorConfig element. 
+ * Next, since setting the initial position works as rotating the rotor, the method will equal the num_rotations to the initial position.
+ * And last, since the ring position does change the alphabet tyre relative to the rotor, the method will modify the alphabet moving the positions of the letters as many times as the position entered.
+ * 
+ */
 Rotor::Rotor(const string type, const int ring_pos, const int start_pos){
 
     rotorConfig.initial_pos = start_pos-1;
