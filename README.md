@@ -61,7 +61,7 @@ Open a terminal or navigate into the project directory and compile the source co
 ## Example
 
 To encrypt the message "hello":
-
+```bash
 START ENIGMA CONFIGURATION:
 ENTER TYPE FOR THE REFLECTOR (UKW) { A , B , C }
 B
@@ -126,7 +126,7 @@ OPTIONS:
 --- 3 --- SHOW ENIGMA CONFIGURATION
 --- 0 --- FINISH PROGRAM
 0
-
+```
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
